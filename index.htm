@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#202321">
+<meta name="description" content="Ash Hotel — まだ名前のない世界で、日常を脱ぎ捨てる滞在を。">
+<title>Ash Hotel | Beyond the Ordinary</title>
+<style>
+:root{
+  --ink:#202321;--ink-soft:#4f5650;--paper:#f3f1eb;--white:#fbfaf6;
+  --ash:#a6aaa1;--line:#d6d8d0;--lime:#d6e6a4;--muted:#a9afa7;
+  --serif:Georgia,"Times New Roman","Yu Mincho",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:86px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Helvetica Neue",Arial,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;line-height:1.7}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+img{max-width:100%;display:block}
+.wrap{width:min(1180px,calc(100% - 48px));margin:auto}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(243,241,235,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:28px}
+.logo{font-family:var(--serif);font-size:1.55rem;letter-spacing:.14em;font-weight:600;white-space:nowrap}
+.logo small{display:block;font:.55rem Arial,sans-serif;letter-spacing:.25em;color:#737a72;margin-top:-3px}
+.navlinks{display:flex;align-items:center;gap:clamp(12px,2.3vw,30px);font-size:.78rem;letter-spacing:.06em}
+.navlinks a:not(.nav-cta){color:#565c55;transition:color .2s}
+.navlinks a:hover{color:#899b63}
+.nav-cta,.button{display:inline-flex;align-items:center;justify-content:center;gap:18px;background:var(--ink);color:var(--white);padding:13px 19px;font-size:.78rem;letter-spacing:.08em;border:1px solid var(--ink);transition:background .2s,color .2s,transform .2s;cursor:pointer}
+.nav-cta:hover,.button:hover{background:#4c544b;transform:translateY(-2px)}
+.menu-toggle{display:none;background:none;border:1px solid var(--line);padding:8px 11px;color:var(--ink)}
+.hero{background:#222723;color:#f3f1eb;min-height:670px;position:relative;overflow:hidden;display:flex;align-items:center}
+.hero-art{position:absolute;inset:0;opacity:.92}
+.hero-art svg{width:100%;height:100%;display:block}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,24,21,.9) 0%,rgba(20,24,21,.55) 47%,rgba(20,24,21,.08) 100%),linear-gradient(0deg,rgba(20,24,21,.4),transparent 45%)}
+.hero-content{position:relative;z-index:2;padding:94px 0 90px;max-width:690px}
+.eyebrow{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--lime);font-weight:600}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(3.3rem,8.5vw,7.7rem);line-height:.98;letter-spacing:-.045em;margin:28px 0}
+.hero h1 span{display:block;font-size:.36em;letter-spacing:.12em;line-height:1.7;margin-top:20px;font-family:Arial,sans-serif;font-weight:400}
+.hero p{max-width:420px;color:#d0d3ca;font-size:.94rem;line-height:2.05;margin:0 0 32px}
+.button.light{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.button.light:hover{background:var(--lime);border-color:var(--lime)}
+.hero-bottom{position:absolute;z-index:2;bottom:27px;left:0;right:0;display:flex;justify-content:space-between;align-items:end;color:#d6d9d0;font-size:.65rem;letter-spacing:.16em;text-transform:uppercase}
+.hero-index{display:flex;align-items:center;gap:12px}
+.hero-index:before{content:"";width:50px;height:1px;background:var(--lime)}
+.scroll-note{writing-mode:vertical-rl;letter-spacing:.18em}
+.intro{padding:105px 0 112px}
+.intro-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:10%;align-items:start}
+.kicker{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:#798271;font-weight:700}
+.intro h2,.section-heading h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.25rem,5vw,4.25rem);line-height:1.14;letter-spacing:-.035em;margin:18px 0}
+.intro-copy{font-family:var(--serif);font-size:clamp(1.15rem,2vw,1.55rem);line-height:1.9;max-width:680px;margin:0}
+.intro-small{color:#737970;font-size:.85rem;line-height:2;margin-top:23px;max-width:620px}
+.stamp{margin-top:34px;display:inline-flex;width:84px;height:84px;border:1px solid #9da294;border-radius:50%;align-items:center;justify-content:center;text-align:center;font-family:var(--serif);font-size:.85rem;line-height:1.3;transform:rotate(-12deg)}
+.section{padding:94px 0}
+.section.dark{background:#252a26;color:var(--paper)}
+.section-head-row{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:38px}
+.section-heading h2{margin-bottom:0}
+.section-description{max-width:350px;color:#777d73;font-size:.84rem;line-height:1.9}
+.dark .section-description{color:#c0c4bb}
+.rooms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.room-card{min-width:0}
+.room-art{height:300px;position:relative;overflow:hidden;background:#b8bdb1}
+.room-art svg{width:100%;height:100%;transition:transform .6s}
+.room-card:hover .room-art svg{transform:scale(1.04)}
+.room-num{position:absolute;top:14px;left:15px;font-size:.67rem;letter-spacing:.15em;background:rgba(243,241,235,.9);padding:6px 9px}
+.room-info{padding:19px 0 0;border-top:1px solid #cdd0c7;margin-top:0}
+.room-title-line{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.room-title-line h3{font-family:var(--serif);font-size:1.55rem;font-weight:400;margin:0}
+.room-title-line span{font-size:.68rem;color:#737970;letter-spacing:.12em}
+.room-info p{font-size:.81rem;color:#6e756c;line-height:1.9;margin:9px 0 12px}
+.room-meta{font-size:.72rem;color:#7e857a;display:flex;gap:14px;flex-wrap:wrap}
+.amenities{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #4b514b;border-bottom:1px solid #4b514b;margin-top:40px}
+.amenity{padding:26px 22px 27px 0;border-right:1px solid #4b514b}
+.amenity:not(:first-child){padding-left:22px}
+.amenity:last-child{border-right:0}
+.amenity .number{font-size:.68rem;color:var(--lime);letter-spacing:.16em}
+.amenity h3{font-family:var(--serif);font-weight:400;font-size:1.35rem;margin:12px 0 8px}
+.amenity p{font-size:.8rem;line-height:1.9;color:#c2c7bd;margin:0}
+.plans{background:#e8e8df}
+.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.plan{padding:27px 24px 25px;border:1px solid #c8ccc0;background:rgba(255,255,255,.34);display:flex;flex-direction:column;min-height:295px}
+.plan.featured{background:#dbe4c6;border-color:#c1d09e}
+.plan-tag{font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:#737b68}
+.plan h3{font-family:var(--serif);font-size:1.65rem;font-weight:400;margin:16px 0 10px}
+.plan p{font-size:.8rem;color:#656d62;line-height:1.9;margin:0 0 20px}
+.plan-bottom{margin-top:auto;border-top:1px solid #c4c9bd;padding-top:15px;display:flex;justify-content:space-between;gap:12px;align-items:end}
+.plan-price{font-family:var(--serif);font-size:1.6rem}
+.plan-price small{font:.68rem Arial,sans-serif;color:#737970}
+.plan-bottom a{font-size:.74rem;font-weight:700;border-bottom:1px solid #7c8574;padding-bottom:3px}
+.gallery{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;margin-top:30px}
+.gallery-art{min-height:300px;overflow:hidden;background:#d7d8cc}
+.gallery-art svg{width:100%;height:100%;min-height:300px;display:block}
+.quote{padding:48px 6%;background:#dce6d1;display:flex;flex-direction:column;justify-content:center}
+.quote .quote-mark{font-family:var(--serif);font-size:4rem;line-height:.8;color:#7d8c6b}
+.quote blockquote{font-family:var(--serif);font-size:clamp(1.45rem,3vw,2.15rem);line-height:1.6;margin:20px 0}
+.quote p{font-size:.77rem;color:#697361;line-height:1.9;margin:0}
+.visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start}
+.visit-grid h2{font-family:var(--serif);font-size:clamp(2.5rem,5vw,4.5rem);font-weight:400;line-height:1.1;margin:15px 0 24px}
+.visit-grid p{font-size:.85rem;color:#6c7369;line-height:2}
+.detail-list{border-top:1px solid var(--line);margin-top:28px}
+.detail-row{display:grid;grid-template-columns:115px 1fr;gap:15px;padding:16px 0;border-bottom:1px solid var(--line);font-size:.8rem}
+.detail-row dt{color:#81877d}
+.detail-row dd{margin:0;line-height:1.8}
+.map-card{background:#dce2d5;min-height:380px;position:relative;overflow:hidden;display:grid;place-items:center}
+.map-card svg{position:absolute;inset:0;width:100%;height:100%}
+.map-label{position:relative;z-index:1;background:rgba(251,250,246,.92);padding:18px 22px;text-align:center;box-shadow:0 5px 20px #353b3020}
+.map-label strong{font-family:var(--serif);font-weight:400;font-size:1.5rem;display:block;letter-spacing:.12em}
+.map-label span{font-size:.65rem;letter-spacing:.13em;color:#72796f}
+.contact{background:#242925;color:#f3f1eb;padding:84px 0}
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+.contact h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.5rem,5vw,4.5rem);line-height:1.1;margin:15px 0}
+.contact-copy{color:#c0c5bb;font-size:.84rem;line-height:2;max-width:400px}
+.contact-form{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field.full{grid-column:1/-1}
+.field label{font-size:.72rem;letter-spacing:.07em;color:#d0d4cc}
+.field input,.field select,.field textarea{width:100%;border:1px solid #5c645b;background:#303631;color:#f8f7f1;padding:12px 13px;border-radius:0;outline:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--lime)}
+.field textarea{min-height:100px;resize:vertical}
+.field input::placeholder,.field textarea::placeholder{color:#a2a89f}
+.form-note{font-size:.68rem;color:#9ea59a;line-height:1.7;grid-column:1/-1}
+.contact-form .button{grid-column:1/-1;justify-self:start;background:var(--lime);color:var(--ink);border-color:var(--lime)}
+footer{background:#171a18;color:#aeb4aa;padding:26px 0}
+.footer-row{display:flex;justify-content:space-between;gap:25px;align-items:center}
+.footer-brand{font-family:var(--serif);letter-spacing:.15em;color:#f3f1eb;font-size:1.15rem}
+.footer-note{font-size:.66rem;letter-spacing:.05em}
+.back-top{font-size:.75rem;white-space:nowrap}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:100;background:#f3f1eb;color:#202321;padding:16px 22px;box-shadow:0 8px 30px #0003;font-size:.83rem;width:min(90%,520px);text-align:center}
+.hidden{display:none}
+@media(max-width:850px){
+ .nav{height:68px}
+ .menu-toggle{display:block}
+ .navlinks{display:none;position:absolute;top:68px;left:0;right:0;background:var(--paper);padding:18px 24px 24px;flex-direction:column;align-items:stretch;border-bottom:1px solid var(--line)}
+ .navlinks.open{display:flex}
+ .navlinks a{padding:8px 0}
+ .hero{min-height:600px}
+ .hero-content{max-width:590px}
+ .intro-grid{grid-template-columns:1fr;gap:25px}
+ .intro{padding:75px 0}
+ .intro-grid .intro-side{display:flex;align-items:center;gap:25px}
+ .stamp{flex-shrink:0;margin:0}
+ .rooms-grid{grid-template-columns:1fr 1fr}
+ .room-card:last-child{grid-column:1/-1}
+ .room-card:last-child .room-art{height:260px}
+ .section{padding:70px 0}
+ .visit-grid{gap:30px}
+ .contact-inner{gap:30px}
+}
+@media(max-width:600px){
+ .wrap{width:calc(100% - 34px)}
+ .hero{min-height:610px}
+ .hero-content{padding:70px 0 85px}
+ .hero h1{font-size:clamp(3rem,14vw,5rem)}
+ .hero-shade{background:linear-gradient(90deg,rgba(20,24,21,.9),rgba(20,24,21,.42)),linear-gradient(0deg,rgba(20,24,21,.4),transparent 60%)}
+ .hero-art svg{width:150%;max-width:none;transform:translateX(-12%)}
+ .hero-bottom{font-size:.56rem}
+ .section-head-row{display:block}
+ .section-description{margin-top:18px}
+ .rooms-grid,.plan-grid{grid-template-columns:1fr}
+ .room-card:last-child{grid-column:auto}
+ .room-art{height:280px}
+ .amenities{grid-template-columns:1fr}
+ .amenity,.amenity:not(:first-child){padding:20px 0;border-right:0;border-bottom:1px solid #4b514b}
+ .amenity:last-child{border-bottom:0}
+ .gallery{grid-template-columns:1fr}
+ .gallery-art,.gallery-art svg{min-height:240px}
+ .quote{padding:35px 28px}
+ .visit-grid,.contact-inner{grid-template-columns:1fr}
+ .visit-grid{gap:35px}
+ .map-card{min-height:300px}
+ .contact-form{grid-template-columns:1fr}
+ .field.full,.form-note,.contact-form .button{grid-column:1}
+ .footer-row{align-items:flex-start;flex-direction:column;gap:12px}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="Ash Hotel トップ">ASH HOTEL<small>BEYOND THE ORDINARY</small></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="メニューを開く" aria-expanded="false">MENU ☰</button>
+    <nav class="navlinks" id="navLinks" aria-label="メインナビゲーション">
+      <a href="#story">STORY</a>
+      <a href="#rooms">ROOMS</a>
+      <a href="#experience">EXPERIENCE</a>
+      <a href="#stay">STAY PLAN</a>
+      <a href="#access">ACCESS</a>
+      <a class="nav-cta" href="#contact">STAY WITH US ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="hero-art" aria-hidden="true">
+    <svg viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#727d72"/><stop offset=".5" stop-color="#353f38"/><stop offset="1" stop-color="#161c19"/></linearGradient>
+        <linearGradient id="moon" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f0f0d8"/><stop offset="1" stop-color="#a8b29d"/></linearGradient>
+        <linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#89958a"/><stop offset="1" stop-color="#303b35"/></linearGradient>
+        <filter id="blur"><feGaussianBlur stdDeviation="22"/></filter>
+      </defs>
+      <rect width="1440" height="760" fill="url(#sky)"/>
+      <circle cx="1030" cy="205" r="130" fill="#c9d2b3" opacity=".2" filter="url(#blur)"/>
+      <circle cx="1030" cy="205" r="84" fill="url(#moon)" opacity=".9"/>
+      <path d="M0 385 Q170 270 330 365 T660 350 T990 360 T1440 280 V760 H0Z" fill="#252e28"/>
+      <path d="M0 455 Q220 360 420 450 T800 430 T1160 410 T1440 450 V760 H0Z" fill="#39443b"/>
+      <path d="M0 555 Q260 495 470 545 T900 530 T1440 535 V760 H0Z" fill="url(#water)"/>
+      <g opacity=".3" stroke="#d8e0c5" stroke-width="2" fill="none"><path d="M730 590 Q910 575 1090 590"/><path d="M790 615 Q980 602 1170 616"/><path d="M850 643 Q1010 634 1140 644"/></g>
+      <g transform="translate(650 240)">
+        <path d="M0 190 L70 125 L150 170 L240 70 L335 155 L420 110 L510 185 V420 H0Z" fill="#1a211d"/>
+        <path d="M95 160 L95 15 L330 15 L330 160" fill="#657265" stroke="#c6d1b9" stroke-width="2"/>
+        <path d="M75 18 L212 -55 L350 18Z" fill="#aeb9a5"/>
+        <path d="M118 65 H307 V160 H118Z" fill="#303a32"/>
+        <g fill="#dfe5bf"><rect x="135" y="83" width="36" height="53"/><rect x="190" y="83" width="36" height="53"/><rect x="245" y="83" width="36" height="53"/></g>
+        <path d="M40 190 L212 115 L388 190" fill="none" stroke="#aeb9a5" stroke-width="3"/>
+        <rect x="178" y="215" width="65" height="205" fill="#121815"/>
+        <rect x="70" y="230" width="75" height="50" fill="#c6d1b9" opacity=".8"/>
+        <rect x="300" y="230" width="75" height="50" fill="#c6d1b9" opacity=".8"/>
+      </g>
+      <g fill="#d9e4c6" opacity=".8">
+        <circle cx="180" cy="150" r="2"/><circle cx="420" cy="220" r="3"/><circle cx="560" cy="110" r="2"/><circle cx="1250" cy="350" r="2"/><circle cx="1150" cy="90" r="3"/><circle cx="1330" cy="190" r="2"/><circle cx="700" cy="150" r="2"/><circle cx="300" cy="310" r="2"/><circle cx="80" cy="250" r="3"/>
+      </g>
+    </svg>
+  </div>
+  <div class="hero-shade"></div>
+  <div class="wrap hero-content">
+    <div class="eyebrow">A PLACE BETWEEN DREAM & REALITY</div>
+    <h1>Stay beyond<br>the ordinary.<span>日常の、その先へ。</span></h1>
+    <p>霧の向こうに、まだ誰も知らない場所がある。<br>時間の流れも、見慣れた景色も忘れて、<br>あなたの感覚が目を覚ます旅へ。</p>
+    <a class="button light" href="#story">DISCOVER ASH HOTEL <span>↗</span></a>
+  </div>
+  <div class="wrap hero-bottom"><div class="hero-index">A HOTEL IN AN UNNAMED WORLD</div><div>35° 00' 00.0" N / Somewhere, beyond</div><div class="scroll-note">SCROLL TO EXPLORE ↓</div></div>
+</section>
+
+<section class="intro" id="story">
+  <div class="wrap intro-grid">
+    <div class="intro-side">
+      <div><div class="kicker">01 — OUR PHILOSOPHY</div><h2>Ash is<br>a beginning.</h2></div>
+      <div class="stamp">BEYOND<br>THE<br>KNOWN</div>
+    </div>
+    <div>
+      <p class="intro-copy">灰色の世界は、何もない場所ではない。<br>まだ、何色にも決まっていない場所。</p>
+      <p class="intro-small">Ash Hotelは、地図に記されていない世界の境界に佇む架空のホテルです。窓の外に広がるのは、夜空に浮かぶ湖、季節を忘れた森、そして見たことのない星々。ここでは、予定を埋める必要も、何かになろうとする必要もありません。ただ、いつもと違う自分の感覚を楽しんでください。</p>
+      <p class="intro-small">名前の「Ash」は、灰色であると同時に、新しい物語が始まる余白の色。あなたの滞在が、日常に戻ったあとも静かに残る体験になりますように。</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="rooms">
+  <div class="wrap">
+    <div class="section-head-row">
+      <div class="section-heading"><div class="kicker">02 — ROOMS & SUITES</div><h2>Choose your<br>own atmosphere.</h2></div>
+      <p class="section-description">どの部屋にも、それぞれ違う世界が広がっています。<br>今の気分にぴったりの景色をお選びください。</p>
+    </div>
+    <div class="rooms-grid">
+      <article class="room-card">
+        <div class="room-art">
+          <svg viewBox="0 0 420 300" preserveAspectRatio="xMidYMid slice" aria-label="霧の森を望む客室のイメージ">
+            <defs><linearGradient id="r1" x2="0" y2="1"><stop stop-color="#a9b7aa"/><stop offset="1" stop-color="#3c5148"/></linearGradient></defs>
+            <rect width="420" height="300" fill="#d4d6c9"/><rect x="35" y="22" width="350" height="210" fill="#394c42"/><rect x="48" y="35" width="324" height="184" fill="url(#r1)"/>
+            <path d="M48 168 Q120 95 190 155 T372 135 V219 H48Z" fill="#617a69"/><path d="M48 192 Q145 130 220 185 T372 169 V219 H48Z" fill="#2d4037"/>
+            <g fill="#23392f"><path d="M80 190 L110 75 L140 190Z"/><path d="M120 190 L160 55 L200 190Z"/><path d="M260 190 L300 65 L340 190Z"/></g>
+            <rect x="190" y="35" width="5" height="184" fill="#e2e0d4"/><rect x="48" y="126" width="324" height="4" fill="#e2e0d4"/>
+            <rect x="0" y="232" width="420" height="68" fill="#a7a18f"/><rect x="28" y="218" width="364" height="28" fill="#d7d2c4"/>
+            <rect x="75" y="235" width="270" height="65" fill="#e7e1d3"/><rect x="95" y="220" width="230" height="30" fill="#f4efe1"/>
+            <rect x="50" y="250" width="70" height="50" fill="#657367"/><rect x="300" y="250" width="70" height="50" fill="#657367"/>
+          </svg><span class="room-num">ROOM 01</span>
+        </div>
+        <div class="room-info"><div class="room-title-line"><h3>Mist Forest</h3><span>霧の森</span></div><p>朝になると、森が部屋のすぐそばまでやってくる。木々の呼吸を感じながら目覚める客室。</p><div class="room-meta"><span>2 GUESTS</span><span>42 m²</span><span>FOREST VIEW</span></div></div>
+      </article>
+      <article class="room-card">
+        <div class="room-art">
+          <svg viewBox="0 0 420 300" preserveAspectRatio="xMidYMid slice" aria-label="星空を眺める客室のイメージ">
+            <defs><linearGradient id="r2" x2="0" y2="1"><stop stop-color="#202b3b"/><stop offset="1" stop-color="#82939a"/></linearGradient></defs>
+            <rect width="420" height="300" fill="#d0d0c6"/><rect x="30" y="20" width="360" height="220" fill="#242f3d"/><rect x="44" y="34" width="332" height="192" fill="url(#r2)"/>
+            <circle cx="280" cy="85" r="29" fill="#e5e4cf"/><g fill="#e6ead9"><circle cx="90" cy="70" r="2"/><circle cx="145" cy="98" r="2"/><circle cx="220" cy="55" r="2"/><circle cx="340" cy="140" r="2"/><circle cx="180" cy="145" r="2"/><circle cx="315" cy="53" r="2"/></g>
+            <path d="M44 180 Q100 140 165 180 T285 176 T376 168 V226 H44Z" fill="#667b81"/><path d="M44 203 Q140 185 225 204 T376 196 V226 H44Z" fill="#9aaba8"/>
+            <rect x="204" y="34" width="4" height="192" fill="#d0d0c6"/><rect x="44" y="128" width="332" height="4" fill="#d0d0c6"/>
+            <rect y="240" width="420" height="60" fill="#9e9b8d"/><rect x="60" y="226" width="300" height="35" fill="#e4dfd1"/><rect x="82" y="238" width="256" height="62" fill="#f1ecdf"/><rect x="105" y="225" width="210" height="30" fill="#fff9e9"/>
+          </svg><span class="room-num">ROOM 02</span>
+        </div>
+        <div class="room-info"><div class="room-title-line"><h3>Celestial</h3><span>星の間</span></div><p>天井いっぱいの窓から、見たことのない星座を眺める。眠るのが惜しくなる夜のために。</p><div class="room-meta"><span>2 GUESTS</span><span>38 m²</span><span>STAR VIEW</span></div></div>
+      </article>
+      <article class="room-card">
+        <div class="room-art">
+          <svg viewBox="0 0 420 300" preserveAspectRatio="xMidYMid slice" aria-label="浮遊する湖を望む客室のイメージ">
+            <defs><linearGradient id="r3" x2="0" y2="1"><stop stop-color="#c9d9d3"/><stop offset="1" stop-color="#7b9992"/></linearGradient></defs>
+            <rect width="420" height="300" fill="#c8c6b8"/><rect x="35" y="20" width="350" height="215" fill="#4e6d68"/><rect x="48" y="33" width="324" height="190" fill="url(#r3)"/>
+            <path d="M48 135 Q110 75 165 124 T270 118 T372 110 V223 H48Z" fill="#a9c6b9"/><path d="M48 166 Q135 135 210 163 T372 148 V223 H48Z" fill="#6d9690"/>
+            <path d="M48 190 Q125 170 205 188 T372 181 V223 H48Z" fill="#c7d7c8" opacity=".8"/>
+            <g fill="#617e70"><ellipse cx="120" cy="85" rx="35" ry="13"/><ellipse cx="300" cy="70" rx="40" ry="15"/></g>
+            <rect x="205" y="33" width="4" height="190" fill="#d4d4c7"/><rect x="48" y="124" width="324" height="4" fill="#d4d4c7"/>
+            <rect y="235" width="420" height="65" fill="#9e9a8b"/><rect x="55" y="220" width="310" height="35" fill="#ddd8c8"/><rect x="78" y="239" width="264" height="61" fill="#f0e9d8"/><rect x="105" y="223" width="210" height="33" fill="#fff7e7"/>
+          </svg><span class="room-num">ROOM 03</span>
+        </div>
+        <div class="room-info"><div class="room-title-line"><h3>Floating Lake</h3><span>浮遊湖</span></div><p>重力を忘れた水面と、ゆっくり流れる雲。世界の境界を感じる、静かな隠れ家。</p><div class="room-meta"><span>3 GUESTS</span><span>51 m²</span><span>LAKE VIEW</span></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section dark" id="experience">
+  <div class="wrap">
+    <div class="section-head-row">
+      <div class="section-heading"><div class="kicker">03 — BEYOND YOUR ROOM</div><h2>More than<br>a stay.</h2></div>
+      <p class="section-description">部屋を出た先にも、知らない体験が待っています。<br>この世界でしか出会えない時間を。</p>
+    </div>
+    <div class="amenities">
+      <article class="amenity"><div class="number">01 / DINING</div><h3>The Quiet Table</h3><p>夜空の色を映す季節のコース。見慣れた食材に、知らない香りと驚きを添えて。</p></article>
+      <article class="amenity"><div class="number">02 / BATH</div><h3>Moon Bath</h3><p>月明かりを浴びる静かな湯処。水面に揺れる光を眺めながら、心までほどく。</p></article>
+      <article class="amenity"><div class="number">03 / LOUNGE</div><h3>Lost & Found</h3><p>世界のどこかから流れ着いた本や音楽が集まるラウンジ。偶然の出会いを楽しんで。</p></article>
+    </div>
+    <div class="gallery">
+      <div class="gallery-art">
+        <svg viewBox="0 0 700 390" preserveAspectRatio="xMidYMid slice" aria-label="幻想的なレストランのイメージ">
+          <defs><linearGradient id="din" x2="0" y2="1"><stop stop-color="#5b6c5d"/><stop offset="1" stop-color="#1f2c26"/></linearGradient></defs>
+          <rect width="700" height="390" fill="#b8b9a8"/><rect x="30" y="25" width="640" height="290" fill="url(#din)"/>
+          <g stroke="#aab9a2" stroke-width="3" fill="none"><path d="M80 25 V315 M180 25 V315 M280 25 V315 M380 25 V315 M480 25 V315 M580 25 V315"/><path d="M30 115 H670 M30 215 H670"/></g>
+          <g fill="#dce5c8" opacity=".8"><circle cx="130" cy="75" r="3"/><circle cx="245" cy="90" r="2"/><circle cx="340" cy="55" r="3"/><circle cx="440" cy="145" r="2"/><circle cx="560" cy="65" r="3"/><circle cx="610" cy="180" r="2"/></g>
+          <rect x="0" y="315" width="700" height="75" fill="#403f34"/><ellipse cx="350" cy="306" rx="260" ry="30" fill="#b8ae91"/><ellipse cx="350" cy="300" rx="235" ry="19" fill="#ddd5bd"/>
+          <g fill="#f0dba1"><circle cx="220" cy="293" r="8"/><circle cx="350" cy="288" r="8"/><circle cx="480" cy="293" r="8"/></g>
+          <g stroke="#d7cba5" stroke-width="4"><path d="M220 300 V345 M350 295 V350 M480 300 V345"/></g>
+        </svg>
+      </div>
+      <div class="quote"><div class="quote-mark">“</div><blockquote>旅の目的は、遠くへ行くことだけじゃない。いつもと違う自分に出会うこと。</blockquote><p>ASH HOTEL JOURNAL<br>— A NOTE FROM THE BORDERLAND</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section plans" id="stay">
+  <div class="wrap">
+    <div class="section-head-row">
+      <div class="section-heading"><div class="kicker">04 — STAY PLANS</div><h2>Make it your story.</h2></div>
+      <p class="section-description">短い休息も、ゆっくりとした旅も。<br>あなたらしい滞在のかたちをお選びください。</p>
+    </div>
+    <div class="plan-grid">
+      <article class="plan"><div class="plan-tag">01 / A SHORT ESCAPE</div><h3>One Night, One Dream</h3><p>初めてのAsh Hotelにおすすめ。客室での休息と、季節のディナーを楽しむ1泊プラン。</p><div class="plan-bottom"><div class="plan-price">¥28,000 <small>〜 / 1名</small></div><a href="#contact">DETAILS ↗</a></div></article>
+      <article class="plan featured"><div class="plan-tag">02 / RECOMMENDED</div><h3>Into the Unknown</h3><p>2泊して、この世界をじっくり味わう。ムーンバス利用と、特別な朝食がついた人気のプラン。</p><div class="plan-bottom"><div class="plan-price">¥52,000 <small>〜 / 1名</small></div><a href="#contact">DETAILS ↗</a></div></article>
+      <article class="plan"><div class="plan-tag">03 / A PRIVATE WORLD</div><h3>Quietly, Together</h3><p>大切な人と過ごすための特別な滞在。レイトチェックアウトとプライベートラウンジ付き。</p><div class="plan-bottom"><div class="plan-price">¥68,000 <small>〜 / 1名</small></div><a href="#contact">DETAILS ↗</a></div></article>
+    </div>
+    <p style="font-size:.68rem;color:#777d72;margin-top:18px">※上記は架空の設定に基づくサンプル料金です。実在する宿泊施設・予約サービスではありません。</p>
+  </div>
+</section>
+
+<section class="section" id="access">
+  <div class="wrap visit-grid">
+    <div>
+      <div class="kicker">05 — FIND YOUR WAY</div><h2>Somewhere<br>beyond.</h2>
+      <p>Ash Hotelは、地図の余白にある架空の場所「境界の谷」に位置しています。霧の回廊を抜け、光る水辺に沿って進むと、静かな灯りが見えてきます。</p>
+      <dl class="detail-list">
+        <div class="detail-row"><dt>DESTINATION</dt><dd>境界の谷 — The Borderland</dd></div>
+        <div class="detail-row"><dt>CHECK IN</dt><dd>15:00 — 20:00</dd></div>
+        <div class="detail-row"><dt>CHECK OUT</dt><dd>11:00</dd></div>
+        <div class="detail-row"><dt>NOTE</dt><dd>現実世界からのアクセス方法は、現在も調査中です。</dd></div>
+      </dl>
+    </div>
+    <div class="map-card" aria-label="架空のホテル周辺を表現した地図">
+      <svg viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="500" height="500" fill="#dce2d5"/>
+        <g fill="none" stroke="#aab8a7" stroke-width="2"><path d="M-20 80 Q110 140 200 70 T530 90"/><path d="M-20 150 Q100 200 200 150 T530 180"/><path d="M-20 260 Q110 300 200 250 T530 275"/><path d="M-20 360 Q100 400 230 350 T530 390"/><path d="M80 -20 Q130 100 100 220 T140 520"/><path d="M220 -20 Q270 90 230 230 T270 520"/><path d="M370 -20 Q330 120 390 260 T370 520"/></g>
+        <path d="M-30 330 Q80 270 140 330 T270 330 T530 290" fill="none" stroke="#91b8b1" stroke-width="28" opacity=".8"/>
+        <path d="M-30 330 Q80 270 140 330 T270 330 T530 290" fill="none" stroke="#d3e9d9" stroke-width="2" stroke-dasharray="8 8"/>
+        <path d="M30 450 Q150 390 210 300 T320 190 T490 80" fill="none" stroke="#f8f4e7" stroke-width="13"/>
+        <path d="M30 450 Q150 390 210 300 T320 190 T490 80" fill="none" stroke="#9ca696" stroke-width="1.5" stroke-dasharray="4 7"/>
+        <g fill="#8d9b85" opacity=".8"><circle cx="80" cy="90" r="25"/><circle cx="420" cy="180" r="34"/><circle cx="105" cy="235" r="19"/><circle cx="430" cy="420" r="28"/><circle cx="340" cy="380" r="20"/></g>
+        <g transform="translate(295 225)"><circle r="35" fill="#eaf0df" opacity=".75"/><circle r="22" fill="#242925"/><path d="M0 -16 L5 -4 L17 0 L5 4 L0 17 L-5 4 L-17 0 L-5 -4Z" fill="#d6e6a4"/></g>
+      </svg>
+      <div class="map-label"><strong>ASH HOTEL</strong><span>THE BORDERLAND · LOCATION UNKNOWN</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-inner">
+    <div>
+      <div class="kicker">06 — YOUR NEXT CHAPTER</div>
+      <h2>Shall we<br>meet there?</h2>
+      <p class="contact-copy">次の旅は、まだ知らない世界へ。<br>ご希望の滞在について、お気軽にお問い合わせください。</p>
+      <p class="contact-copy" style="font-size:.72rem">※このフォームはデモ用です。送信内容は実際には送信・保存されません。</p>
+    </div>
+    <form class="contact-form" id="contactForm">
+      <div class="field"><label for="name">YOUR NAME / お名前</label><input id="name" name="name" placeholder="Your name" required></div>
+      <div class="field"><label for="email">EMAIL / メールアドレス</label><input id="email" name="email" type="email" placeholder="hello@example.com" required></div>
+      <div class="field"><label for="date">ARRIVAL / ご到着希望日</label><input id="date" name="date" type="date"></div>
+      <div class="field"><label for="guests">GUESTS / ご宿泊人数</label><select id="guests" name="guests"><option>1名</option><option selected>2名</option><option>3名</option><option>4名以上</option></select></div>
+      <div class="field full"><label for="message">MESSAGE / メッセージ</label><textarea id="message" name="message" placeholder="どんな滞在をご希望ですか？"></textarea></div>
+      <p class="form-note">送信ボタンを押すと、デモフォームであることをお知らせします。実際の予約は行われません。</p>
+      <button class="button" type="submit">SEND AN INQUIRY <span>↗</span></button>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <div><div class="footer-brand">ASH HOTEL</div><div class="footer-note">BEYOND THE ORDINARY — A FICTIONAL HOTEL CONCEPT</div></div>
+    <div class="footer-note">© 2026 ASH HOTEL · ALL STORIES RESERVED</div>
+    <a class="back-top" href="#top">BACK TO TOP ↑</a>
+  </div>
+</footer>
+
+<div id="toast" class="toast hidden" role="status"></div>
+
+<script>
+const menuToggle=document.getElementById('menuToggle');
+const navLinks=document.getElementById('navLinks');
+
+menuToggle.addEventListener('click',()=>{
+  const isOpen=navLinks.classList.toggle('open');
+  menuToggle.setAttribute('aria-expanded',String(isOpen));
+  menuToggle.textContent=isOpen?'CLOSE ×':'MENU ☰';
+});
+
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  navLinks.classList.remove('open');
+  menuToggle.setAttribute('aria-expanded','false');
+  menuToggle.textContent='MENU ☰';
+}));
+
+const form=document.getElementById('contactForm');
+const toast=document.getElementById('toast');
+
+form.addEventListener('submit',e=>{
+  e.preventDefault();
+  toast.textContent='ありがとうございます！こちらはデモサイトのため、予約・送信は行われていません。';
+  toast.classList.remove('hidden');
+  window.setTimeout(()=>toast.classList.add('hidden'),5000);
+});
+</script>
+</body>
+</html>
